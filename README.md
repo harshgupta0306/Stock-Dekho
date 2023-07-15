@@ -26,10 +26,11 @@ By integrating Python, Django, yfinance, pandas, Plotly, HTML, and JavaScript, t
 Installation:
 
 1) Python : https://www.python.org/ 
-2) Django : python -m pip install -U pip 
-3) yfinance : pip install yfinance
-4) pandas : pip install pandas
-5) plotly : pip install plotly
+2) Django : python -m pip install -U pip
+            pip install django
+4) yfinance : pip install yfinance
+5) pandas : pip install pandas
+6) plotly : pip install plotly
 
 Execution Process:
 
