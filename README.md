@@ -21,3 +21,19 @@ Interactive charts and visualizations is done using the Plotly library, enabling
 
 By integrating Python, Django, yfinance, pandas, Plotly, HTML, and JavaScript, this project aims to create a comprehensive stock data visualization website that empowers users with valuable insights for investment purposes.
 ![image](https://github.com/htrovert/Stock-Dekho/assets/65252003/89e84ba1-d92a-48e5-a80d-bb8bdaefedca)
+![image](https://github.com/htrovert/Stock-Dekho/assets/65252003/5e53a2a7-a46f-4573-9c69-3f6cc48261fc)
+
+Installation:
+
+1) Python : https://www.python.org/ 
+2) Django : python -m pip install -U pip 
+3) yfinance : pip install yfinance
+4) pandas : pip install pandas
+5) plotly : pip install plotly
+
+Execution Process:
+
+1) clone the repository
+2) open cmd in STOCK DEKHO folder
+3) py manage.py runserver  #run this command
+4) http://127.0.0.1:8000/ #open this link in your browser
