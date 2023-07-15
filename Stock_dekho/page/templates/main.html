@@ -1,0 +1,103 @@
+{% extends "master.html" %}
+
+{% block title %}
+Stock Dekho
+{% endblock %}
+
+{% block content%}
+
+<div id="heading">
+    <h3>STOCK DEKHO</h3>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- <p>Check out all the songs of seedhe maut<a href = "/polls/">play</a></p> -->
+<div id="body-container">
+
+    <div id="stocknames">
+        <!-- <form method="POST"> -->
+            {% for x in stocks %}
+            <button class="stockbutton" id= "stockbutton" onclick="setGetParameter('{{x.SYMBOL}}','{{x.NAME}}')" type="button" class="btn btn-primary" title="{{x.NAME}} " >{{x.NAME}}</button>
+            <br>
+            {% endfor %}<!-- <input id="search" name="search" type="text" class="query-search" placeholder="Search..."> -->
+            <!-- </form> -->
+    </div>
+    <div id="chart-container">
+            <div id="stockstats">
+                <p id="name">Name</p>
+                <p class="Date">Date : <span id="Date"></span></p>
+                
+            </div>
+            <iframe id="chart" src = "/chart/" ></iframe>
+            <div id="Stats">
+                <p>Open  : <span id="Open"></span></p>
+                <p>High : <span id="High"></span></p>
+                <p>52-Week High : <span id="_52High"></span></p>
+                <p>Close : <span id="Close"></span></p>
+                <p>Low  : <span id="Low"></span></p>
+                <p>52-Week Low  : <span id="_52Low"></span></p>
+
+
+            </div>
+    </div>
+</div>
+        <!-- {% comment %} <button type="submit" onclick="location.href='{% url 'view_detail' %}'" method="post" value={{"harsh"}} name='search' id="search">Download Excel file</button> {% endcomment %} -->
+<!-- <div>
+<form action="{% url 'view_detail' %}" method="post">
+    {% csrf_token %}
+    <input name="search" type="text" class="query-search" 
+     placeholder="Search...">
+    <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+    </div> -->
+<script>
+    function setGetParameter(tiker,name){
+    searchWord = tiker+".NS";
+    // window.alert(name);
+    console.log(searchWord);
+    // window.location.href = "{% url 'view_detail' %}";
+    $.ajax({
+        type: "POST",
+        // method: 'POST',
+        url: "{% url 'view_detail' %}",
+        data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            "result": searchWord,
+        },
+        dataType: "json",
+        success: function (data) {
+            // any process in data
+            setTimeout ( function(){
+                // function_body
+                document.getElementById('chart').contentWindow.location.reload(true);
+            });
+            document.getElementById("name").innerHTML = name;
+            document.getElementById("Date").innerHTML = data["Date"];
+            document.getElementById("Open").innerHTML = data["Open"];
+            document.getElementById("Close").innerHTML = data["Close"];
+            document.getElementById("High").innerHTML = data["High"];
+            document.getElementById("Low").innerHTML = data["Low"];
+            document.getElementById("_52High").innerHTML = data["52High"];
+            document.getElementById("_52Low").innerHTML = data["52Low"];
+            console.log(data);
+        }
+        // failure: function () {
+        //     alert("failure");
+        // }
+    });
+}
+</script>
+<script>
+    const buttons = document.querySelectorAll('.stockbutton');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove the 'active' class from all buttons
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Add the 'active' class to the clicked button
+    button.classList.add('active');
+  });
+});
+
+</script>
+{% endblock %}
